@@ -28,6 +28,7 @@ import org.apache.camel.NoSuchLanguageException;
 import org.apache.camel.Predicate;
 import org.apache.camel.model.ExpressionSubElementDefinition;
 import org.apache.camel.model.language.ConstantExpression;
+import org.apache.camel.model.language.DatasonnetExpression;
 import org.apache.camel.model.language.ExchangePropertyExpression;
 import org.apache.camel.model.language.ExpressionDefinition;
 import org.apache.camel.model.language.GroovyExpression;
@@ -64,6 +65,7 @@ public class ExpressionReifier<T extends ExpressionDefinition> extends AbstractR
         Map<Class<?>, BiFunction<CamelContext, ExpressionDefinition, ExpressionReifier<? extends ExpressionDefinition>>> map
                 = new LinkedHashMap<>(18);
         map.put(ConstantExpression.class, ExpressionReifier::new);
+        map.put(DatasonnetExpression.class, DatasonnetExpressionReifier::new);
         map.put(ExchangePropertyExpression.class, ExpressionReifier::new);
         map.put(ExpressionDefinition.class, ExpressionReifier::new);
         map.put(GroovyExpression.class, ExpressionReifier::new);
