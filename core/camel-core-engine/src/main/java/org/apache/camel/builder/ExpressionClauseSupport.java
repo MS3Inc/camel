@@ -22,6 +22,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Expression;
 import org.apache.camel.ExpressionFactory;
 import org.apache.camel.model.language.ConstantExpression;
+import org.apache.camel.model.language.DatasonnetExpression;
 import org.apache.camel.model.language.ExchangePropertyExpression;
 import org.apache.camel.model.language.GroovyExpression;
 import org.apache.camel.model.language.HeaderExpression;
@@ -249,8 +250,17 @@ public class ExpressionClauseSupport<T> {
     }
 
     /**
-     * Evaluates a <a href="http://camel.apache.org/jsonpath.html">Json Path
-     * expression</a>
+     * Evaluates a <a href="http://camel.apache.org/datasonnet.html">Datasonnet expression</a>
+     *
+     * @param text the expression to be evaluated
+     * @return the builder to continue processing the DSL
+     */
+    public T datasonnet(String text) {
+        return expression(new DatasonnetExpression(text));
+    }
+
+    /**
+     * Evaluates a <a href="http://camel.apache.org/jsonpath.html">Json Path expression</a>
      *
      * @param text the expression to be evaluated
      * @return the builder to continue processing the DSL
@@ -735,7 +745,8 @@ public class ExpressionClauseSupport<T> {
 
     /**
      * Evaluates an XML token expression on the message body with XML content
-     * 
+<<<<<<< HEAD
+     *
      * @param path the xpath like path notation specifying the child nodes to
      *            tokenize
      * @param mode one of 'i', 'w', or 'u' to inject the namespaces to the
@@ -744,6 +755,15 @@ public class ExpressionClauseSupport<T> {
      * @param namespaces the namespace map to the namespace bindings
      * @param group to group by the given number
      * @return the builder to continue processing the DSL
+=======
+     *
+     * @param  path       the xpath like path notation specifying the child nodes to tokenize
+     * @param  mode       one of 'i', 'w', or 'u' to inject the namespaces to the token, to wrap the token with its
+     *                    ancestor contet, or to unwrap to its element child
+     * @param  namespaces the namespace map to the namespace bindings
+     * @param  group      to group by the given number
+     * @return            the builder to continue processing the DSL
+>>>>>>> c35af321bf9... datasonnet: adds language
      */
     public T xtokenize(String path, char mode, Namespaces namespaces, int group) {
         XMLTokenizerExpression expression = new XMLTokenizerExpression(path);
@@ -769,12 +789,21 @@ public class ExpressionClauseSupport<T> {
     }
 
     /**
+<<<<<<< HEAD
      * Evaluates an <a href="http://camel.apache.org/xpath.html">XPath
      * expression</a> on the supplied header name's contents
-     * 
+     *
      * @param text the expression to be evaluated
      * @param headerName the name of the header to apply the expression to
      * @return the builder to continue processing the DSL
+=======
+     * Evaluates an <a href="http://camel.apache.org/xpath.html">XPath expression</a> on the supplied header name's
+     * contents
+     *
+     * @param  text       the expression to be evaluated
+     * @param  headerName the name of the header to apply the expression to
+     * @return            the builder to continue processing the DSL
+>>>>>>> c35af321bf9... datasonnet: adds language
      */
     public T xpath(String text, String headerName) {
         XPathExpression expression = new XPathExpression(text);
@@ -905,12 +934,20 @@ public class ExpressionClauseSupport<T> {
     }
 
     /**
+<<<<<<< HEAD
      * Evaluates an <a href="http://camel.apache.org/xquery.html">XQuery
      * expression</a>
-     * 
+     *
      * @param text the expression to be evaluated
      * @param headerName the name of the header to apply the expression to
      * @return the builder to continue processing the DSL
+=======
+     * Evaluates an <a href="http://camel.apache.org/xquery.html">XQuery expression</a>
+     *
+     * @param  text       the expression to be evaluated
+     * @param  headerName the name of the header to apply the expression to
+     * @return            the builder to continue processing the DSL
+>>>>>>> c35af321bf9... datasonnet: adds language
      */
     public T xquery(String text, String headerName) {
         XQueryExpression expression = new XQueryExpression(text);
