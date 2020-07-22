@@ -1,0 +1,21 @@
+{
+  "model": {
+    "kind": "model",
+    "name": "datasonnet",
+    "title": "Datasonnet",
+    "description": "To use Datasonnet scripts in Camel expressions or predicates.",
+    "deprecated": false,
+    "firstVersion": "3.5.0",
+    "label": "language,script",
+    "javaType": "org.apache.camel.model.language.DatasonnetExpression",
+    "input": false,
+    "output": false
+  },
+  "properties": {
+    "expression": { "kind": "value", "displayName": "Expression", "required": true, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The expression value in your chosen language syntax" },
+    "inputMimeType": { "kind": "attribute", "displayName": "Input Mime Type", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "TODO: 7\/21\/20 docs" },
+    "outputMimeType": { "kind": "attribute", "displayName": "Output Mime Type", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "TODO: 7\/21\/20 docs" },
+    "trim": { "kind": "attribute", "displayName": "Trim", "required": false, "type": "boolean", "javaType": "java.lang.Boolean", "deprecated": false, "secret": false, "defaultValue": true, "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks" },
+    "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
+  }
+}
