@@ -16,14 +16,14 @@
  */
 package org.apache.camel.reifier.language;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Expression;
 import org.apache.camel.Predicate;
-import org.apache.camel.model.language.ExpressionDefinition;
 import org.apache.camel.model.language.DatasonnetExpression;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.camel.model.language.ExpressionDefinition;
 
 public class DatasonnetExpressionReifier extends ExpressionReifier<DatasonnetExpression> {
 
@@ -50,6 +50,5 @@ public class DatasonnetExpressionReifier extends ExpressionReifier<DatasonnetExp
         properties.put("type", definition.getType());
         setProperties(target, properties);
     }
-
 
 }
