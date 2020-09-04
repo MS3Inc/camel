@@ -1,12 +1,12 @@
 package org.apache.camel.model.language;
 
-import org.apache.camel.Expression;
-import org.apache.camel.spi.Metadata;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.camel.Expression;
+import org.apache.camel.spi.Metadata;
 
 /**
  * To use Datasonnet scripts in Camel expressions or predicates.
@@ -47,6 +47,7 @@ public class DatasonnetExpression extends ExpressionDefinition {
 
     /**
      * TODO: 7/21/20 docs
+     * 
      * @param inputMimeType docs
      */
     public void setInputMimeType(String inputMimeType) {
@@ -59,6 +60,7 @@ public class DatasonnetExpression extends ExpressionDefinition {
 
     /**
      * TODO: 7/21/20 docs
+     * 
      * @param outputMimeType docs
      */
     public void setOutputMimeType(String outputMimeType) {
@@ -67,6 +69,7 @@ public class DatasonnetExpression extends ExpressionDefinition {
 
     /**
      * TODO: 9/3/20 docs
+     * 
      * @return
      */
     public String getType() {
@@ -75,6 +78,7 @@ public class DatasonnetExpression extends ExpressionDefinition {
 
     /**
      * TODO: 9/3/20 docs
+     * 
      * @param type
      */
     public void setType(String type) {

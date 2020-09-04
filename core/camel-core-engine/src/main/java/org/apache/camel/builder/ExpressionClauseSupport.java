@@ -252,8 +252,8 @@ public class ExpressionClauseSupport<T> {
     /**
      * Evaluates a <a href="http://camel.apache.org/datasonnet.html">Datasonnet expression</a>
      *
-     * @param text the expression to be evaluated
-     * @return the builder to continue processing the DSL
+     * @param  text the expression to be evaluated
+     * @return      the builder to continue processing the DSL
      */
     public T datasonnet(String text) {
         return expression(new DatasonnetExpression(text));
