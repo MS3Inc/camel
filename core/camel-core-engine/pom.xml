@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>camel-core-engine</artifactId>
+    <version>3.5.0-MS3-001</version>
     <packaging>jar</packaging>
 
     <name>Camel :: Core Engine</name>
@@ -65,22 +66,27 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-api</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-base</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-management-api</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-support</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-util</artifactId>
+            <version>3.5.0</version>
         </dependency>
 
     </dependencies>
@@ -114,6 +120,18 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.camel</groupId>
+                    <artifactId>camel-format-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <dependencies>
+                      <dependency>
+                          <groupId>org.apache.camel</groupId>
+                          <artifactId>camel-buildtools</artifactId>
+                          <version>3.5.0</version>
+                      </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -121,6 +139,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-package-maven-plugin</artifactId>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>generate-configurer</id>
@@ -146,6 +165,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-bundle-plugin</artifactId>
+                <version>3.5.0</version>
                 <configuration>
                     <instructions>
                         <_plugin>

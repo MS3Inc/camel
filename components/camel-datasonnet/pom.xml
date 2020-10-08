@@ -27,6 +27,7 @@
     </parent>
 
     <artifactId>camel-datasonnet</artifactId>
+    <version>3.5.0-MS3-001</version>
     <packaging>jar</packaging>
 
     <name>Camel :: DataSonnet</name>
