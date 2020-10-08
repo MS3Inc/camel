@@ -153,12 +153,11 @@ public class DatasonnetExpression extends ExpressionAdapter implements Expressio
         Map<String, Document<?>> inputs = Collections.singletonMap("body", body);
 
         DatasonnetLanguage language = (DatasonnetLanguage) exchange.getContext().resolveLanguage("datasonnet");
-        Mapper mapper = language.cache(expression, () ->
-                new MapperBuilder(expression)
-                        .withInputNames(inputs.keySet())
-                        .withImports(resolveImports())
-                        .withLibrary(CML$.MODULE$)
-                        .build());
+        Mapper mapper = language.cache(expression, () -> new MapperBuilder(expression)
+                .withInputNames(inputs.keySet())
+                .withImports(resolveImports())
+                .withLibrary(CML$.MODULE$)
+                .build());
 
         // pass exchange to CML lib using thread as context
         CML.exchange().set(exchange);
