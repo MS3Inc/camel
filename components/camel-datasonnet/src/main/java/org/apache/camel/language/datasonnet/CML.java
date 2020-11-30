@@ -1,6 +1,9 @@
 package org.apache.camel.language.datasonnet;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import com.datasonnet.document.DefaultDocument;
 import com.datasonnet.document.Document;
@@ -14,8 +17,19 @@ import sjsonnet.Materializer;
 import sjsonnet.Val;
 
 public class CML extends Library {
+    private static final CML INSTANCE = new CML();
+    private final ThreadLocal<Exchange> exchange = new ThreadLocal<>();
 
-    public static final ThreadLocal<Exchange> exchange = new ThreadLocal<Exchange>();
+    public static CML getInstance() {
+        return INSTANCE;
+    }
+
+    private CML() {
+    }
+
+    public ThreadLocal<Exchange> getExchange() {
+        return exchange;
+    }
 
     @Override
     public String namespace() {
@@ -52,7 +66,7 @@ public class CML extends Library {
 
     private Val properties(Val key) {
         if (key instanceof Val.Str) {
-            return new Val.Str(exchange.get().getContext().resolvePropertyPlaceholders("{{" + key + "}}"));
+            return new Val.Str(exchange.get().getContext().resolvePropertyPlaceholders("{{" + ((Val.Str) key).value() + "}}"));
         }
         throw new IllegalArgumentException("Expected String got: " + key.prettyName());
     }
