@@ -1,5 +1,7 @@
 package org.apache.camel.language.datasonnet;
 
+import java.util.*;
+
 import com.datasonnet.document.DefaultDocument;
 import com.datasonnet.document.Document;
 import com.datasonnet.document.MediaTypes;
@@ -8,14 +10,10 @@ import com.datasonnet.spi.DataFormatService;
 import com.datasonnet.spi.Library;
 import com.datasonnet.spi.PluginException;
 import org.apache.camel.Exchange;
-import scala.collection.JavaConverters;
-import scala.collection.immutable.Map;
-import scala.collection.immutable.Set;
 import sjsonnet.Materializer;
-import sjsonnet.Std;
 import sjsonnet.Val;
 
-public class CMLJava extends Library {
+public class CML extends Library {
 
     public static final ThreadLocal<Exchange> exchange = new ThreadLocal<Exchange>();
 
@@ -26,52 +24,35 @@ public class CMLJava extends Library {
 
     @Override
     public Set<String> libsonnets() {
-        return scala.collection.immutable.Set$.MODULE$.empty();
+        return Collections.emptySet();
     }
 
     @Override
-    public Map<String, Val.Func> functions(DataFormatService dataFormats, Header header) {
+    public java.util.Map<String, Val.Func> functions(DataFormatService dataFormats, Header header) {
+        return Collections.unmodifiableMap(new HashMap<String, Val.Func>() {
+            {
+                //put(<function name>, makeSimpleFunc(<param list>, lambda function))
+                put("properties", makeSimpleFunc(
+                        Collections.singletonList("key"), //parameters list
+                        params -> properties(params.get(0))));
+                put("header", makeSimpleFunc(
+                        Collections.singletonList("key"), //parameters list
+                        params -> header(params.get(0), dataFormats)));
+                put("exchangeProperty", makeSimpleFunc(
+                        Collections.singletonList("key"), //parameters list
+                        params -> exchangeProperty(params.get(0), dataFormats)));
+            }
+        });
 
-        /*
-              def builtin0[R: ReadWriter](name: String, params: String*)(eval: (Array[Val], EvalScope, FileScope) => R) = {
-                val paramData = params.zipWithIndex.map{case (k, i) => (k, None, i)}.toArray
-                val paramIndices = params.indices.toArray
-                name -> Val.Func(
-                  None,
-                  Params(paramData),
-                  {(scope, thisFile, ev, fs, outerOffset) =>
-                    implicitly[ReadWriter[R]].write(
-                      eval(paramIndices.map(i => scope.bindings(i).get.force), ev, fs)
-                    )
-                  }
-                )
-              }
-             Tuple2(name, Val.Obj.Member(
-                add = false,
-                Visibility.None,
-                Val.Func(
-                    None,
-                    Params,
-                    evalRhs?
-                )
-             ))
-         */
-        /*Std.builtin0(
-                "properties",
-                JavaConverters.asScalaIteratorConverter(new ArrayList<String>() {{add("key");}}.iterator()).asScala().toSeq(),
-                "",
-                ""
-        );*/
-        return null;
     }
 
     public Map<String, Val.Obj> modules(DataFormatService dataFormats, Header header) {
-        return scala.collection.immutable.Map$.MODULE$.empty();
+        return Collections.emptyMap();
     }
 
-    private String properties(Val key) {
+    private Val properties(Val key) {
         if (key instanceof Val.Str) {
-            return exchange.get().getContext().resolvePropertyPlaceholders("{{" + key + "}}");
+            return new Val.Str(exchange.get().getContext().resolvePropertyPlaceholders("{{" + key + "}}"));
         }
         throw new IllegalArgumentException("Expected String got: " + key.prettyName());
     }
@@ -101,7 +82,7 @@ public class CMLJava extends Library {
 
         try {
             return Materializer
-                    .reverse(dataformats.thatCanRead(doc).orElseThrow(() -> new IllegalArgumentException("todo")).read(doc));
+                    .reverse(dataformats.thatAccepts(doc).orElseThrow(() -> new IllegalArgumentException("todo")).read(doc));
         } catch (PluginException e) {
             throw new IllegalStateException(e);
         }
